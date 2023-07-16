@@ -15,7 +15,8 @@ import javax.swing.*;
                         ConversorMoneda conversorMoneda = new ConversorMoneda();
                         conversorMoneda.realizarConversion();
                     } else if (opcion.equals("Conversión de temperatura")) {
-                        // Aquí puedes implementar la lógica para la conversión de temperatura
+                        ConversorTemperatura conversorTemperatura = new ConversorTemperatura();
+                        conversorTemperatura.realizarConversion();
                         JOptionPane.showMessageDialog(null, "Conversión de temperatura no implementada.");
                     }
                 }
