@@ -13,12 +13,35 @@ public class ConversorMoneda {
     public void realizarConversion() {
         String monedaOrigen = mostrarInputDialogConOpciones("Ingrese la moneda de origen:", OPCIONES_MONEDAS);
         String monedaDestino = mostrarInputDialogConOpciones("Ingrese la moneda de destino:", OPCIONES_MONEDAS);
-        double cantidad = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la cantidad a convertir:"));
+        double cantidad = obtenerCantidadValida();
 
-        double cantidadConvertida = convertirMoneda(monedaOrigen, monedaDestino, cantidad);
-
-        JOptionPane.showMessageDialog(null, cantidad + " " + monedaOrigen + " = " + cantidadConvertida + " " + monedaDestino);
+        if (cantidad != Double.MIN_VALUE) {
+            double cantidadConvertida = convertirMoneda(monedaOrigen, monedaDestino, cantidad);
+            JOptionPane.showMessageDialog(null, cantidad + " " + monedaOrigen + " = " + cantidadConvertida + " " + monedaDestino);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese una cantidad válida (número).");
+        }
     }
+
+    private double obtenerCantidadValida() {
+        double cantidad = Double.MIN_VALUE;
+        boolean entradaValida = false;
+
+        while (!entradaValida) {
+            String input = JOptionPane.showInputDialog("Ingrese la cantidad a convertir:");
+            try {
+                cantidad = Double.parseDouble(input);
+                entradaValida = true;
+            } catch (NumberFormatException e) {
+                // La entrada no es un número válido, se mostrará un mensaje de error y se solicitará nuevamente.
+                JOptionPane.showMessageDialog(null, "Ingrese una cantidad válida (número).");
+            }
+        }
+
+        return cantidad;
+    }
+
+
 
     private String mostrarInputDialogConOpciones(String mensaje, String[] opciones) {
         return (String) JOptionPane.showInputDialog(null, mensaje, "Conversión",

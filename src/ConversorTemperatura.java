@@ -10,7 +10,7 @@ public class ConversorTemperatura {
     public void realizarConversion() {
         String temperaturaOrigen = mostrarInputDialogConOpciones("Ingrese la temperatura de origen:", OPCIONES_TEMPERATURAS);
         String temperaturaDestino = mostrarInputDialogConOpciones("Ingrese la temperatura de destino:", OPCIONES_TEMPERATURAS);
-        double cantidad = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la temperatura a convertir"));
+        double cantidad = obtenerTemperaturaValida();
 
         double gradosConvertido = convertirTemperatura(temperaturaOrigen, temperaturaDestino, cantidad);
 
@@ -20,6 +20,23 @@ public class ConversorTemperatura {
     private String mostrarInputDialogConOpciones(String mensaje, String[] opciones) {
         return (String) JOptionPane.showInputDialog(null, mensaje, "Conversión",
                 JOptionPane.DEFAULT_OPTION, null, opciones, opciones[0]);
+    }
+
+    private double obtenerTemperaturaValida() {
+        double temperatura = Double.NaN;
+        boolean entradaValida = false;
+
+        while (!entradaValida) {
+            String input = JOptionPane.showInputDialog("Ingrese la temperatura a convertir:");
+            try {
+                temperatura = Double.parseDouble(input);
+                entradaValida = true;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Ingrese una temperatura válida (número).");
+            }
+        }
+
+        return temperatura;
     }
 
     private double convertirTemperatura(String temperaturaOrigen, String temperaturaDestino, double cantidad) {
