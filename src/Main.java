@@ -17,7 +17,6 @@ import javax.swing.*;
                     } else if (opcion.equals("Conversión de temperatura")) {
                         ConversorTemperatura conversorTemperatura = new ConversorTemperatura();
                         conversorTemperatura.realizarConversion();
-                        JOptionPane.showMessageDialog(null, "Conversión de temperatura no implementada.");
                     }
                 }
             }
